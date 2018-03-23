@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Script for display about SIP's channel information
+# There are just 2 channels, but you can replicate the variables for adding more channels
+
+while true      # loop every 3 seconds and refresh the variables, you can modify the sleep value for your convenience
+do
+clear
+
+numchannsTRUNK1=$(asterisk -rx "sip show channels" | grep -i GTD | wc -l)       # you know the name of the trunk channel and put it after the grep command (here in GTD for example)
+channsTRUNK1=$(asterisk -rx "sip show channels" | grep -i GTD)                  # here too
+numchannsTRUNK2=$(asterisk -rx "sip show channels" | grep -i VoipA | wc -l)     # you know the name of the trunk channel and put it after the grep command (here in VoipA for example)
+channsTRUNK2=$(asterisk -rx "sip show channels" | grep -i VoipA)                # here too
+echo "$channsTRUNK1"
+echo
+echo "$channsTRUNK2"
+echo
+echo "________________________________________________________________________________________"
+echo
+echo "The quantity of active channels in VoipA is: $numchannsTRUNK2"
+echo
+echo "The quantity of active channels in GTD is: $numchannsTRUNK1 "
+sleep 3
+done
